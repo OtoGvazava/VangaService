@@ -3,13 +3,13 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import GamesSerializer
-from .models import Games
+from .models import Game
 
 
 @api_view(['GET'])
 def gamesList(request):
     page = request.GET.get('page', 1)
-    games = Games.objects.all()
+    games = Game.objects.all()
     pages = Paginator(games, 3)
     if int(page) > pages.num_pages:
         return Response([])
